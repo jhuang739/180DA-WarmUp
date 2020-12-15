@@ -6,4 +6,6 @@ def handleIMU(action, mqtt_test):
 
 if __name__ == "__main__":
     mqtt_test = mqtt.MQTTLink("ece180d/MEAT/imu")
-    handleIMU("test test", mqtt_test)
+    mqtt_test.addText(action, "Siri")
+    mqtt_test.send()
+    #handleIMU("test test", mqtt_test)
