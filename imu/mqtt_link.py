@@ -99,6 +99,7 @@ class MQTTLink:
             next_message = self.messages.get()
             print(next_message)
             self.tx.publish(self.board, json.dumps(next_message), qos=1)
+            print("let's go")
 
         self.tx.loop_stop()
 
