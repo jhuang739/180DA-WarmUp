@@ -2,8 +2,9 @@ import paho.mqtt.client as mqtt
 
 def on_connect(client, userdata, flags, rc):
     print("Connection returned result: " + str(rc))
+    client.subscribe("ece180d/MEAT/imu", qos=1)
 
-def on_disconnect(client, userdata, rc):
+def on_disconnect(client, userdata, flags, rc):
     if rc != 0:
         print('Unexpected Disconnect')
     else:
@@ -18,11 +19,10 @@ client.on_disconnect = on_disconnect
 client.on_message = on_message
 
 client.connect_async('mqtt.eclipseprojects.io')
-
 client.loop_start()
 
-for i in range(5):
-    client.publish('ece180d/custom8', "yes this works", qos=1)
+while True:
+    pass
 
 client.loop_stop()
 client.disconnect()

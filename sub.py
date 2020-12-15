@@ -2,7 +2,7 @@ import paho.mqtt.client as mqtt
 
 def on_connect(client, userdata, flags, rc):
     print("Connection returned result: " + str(rc))
-    client.subscribe("ece180d/test", qos=1)
+    client.subscribe("ece180d/custom8", qos=1)
 
 def on_disconnect(client, userdata, flags, rc):
     if rc != 0:
@@ -18,7 +18,7 @@ client.on_connect = on_connect
 client.on_disconnect = on_disconnect
 client.on_message = on_message
 
-client.connect_async('mqtt.eclipse.org')
+client.connect_async('mqtt.eclipseprojects.io')
 client.loop_start()
 
 while True:
