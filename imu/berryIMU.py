@@ -83,8 +83,9 @@ YP_11 = 0.0
 KFangleX = 0.0
 KFangleY = 0.0
 
+mqtt_test = mqtt.MQTTLink("ece180d/MEAT/imu")
+
 def handleIMU(action):
-    mqtt_test = mqtt.MQTTLink("ece180d/MEAT/imu")
     mqtt_test.addText(action, "Siri")
     mqtt_test.send()
     """
