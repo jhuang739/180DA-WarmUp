@@ -25,7 +25,7 @@ import datetime
 import os
 
 from imu_integration.pub import PUBLISHER
-from mqtt_link import mqtt
+import mqtt_link as mqtt
 
 
 RAD_TO_DEG = 57.29578
