@@ -23,7 +23,6 @@ import math
 import IMU
 import datetime
 import os
-import json
 
 from imu_integration.pub import PUBLISHER
 import mqtt_link as mqtt
