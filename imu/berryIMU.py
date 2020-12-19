@@ -87,7 +87,8 @@ def handleIMU(action):
     mqtt_test.addText(action, "Siri")
     mqtt_test.send()
 
-def printD(self, data):
+def printD(data):
+    print(data)
     with open('imudata.csv', 'w') as csvfile:
         csvwriter = csv.writer(csvfile)
         csvwriter.writerow(data)
