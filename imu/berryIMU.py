@@ -87,11 +87,13 @@ def handleIMU(action):
     mqtt_test.addText(action, "Siri")
     mqtt_test.send()
 
+
 def printD(data):
-    print(data)
+    fields = ['ACCY']
     with open('imudata.csv', 'w') as csvfile:
         csvwriter = csv.writer(csvfile)
-        csvwriter.writerow(data)
+        csvwriter.writerow(fields)
+        csvwriter.writerows(data)
 
 
 def kalmanFilterY ( accAngle, gyroRate, DT):
@@ -207,6 +209,8 @@ def runIMU():
     IMU.initIMU()       #Initialise the accelerometer, gyroscope and compass
 
     print("detecting motion...")
+    count = 1
+    data = []
     while True:
 
         #Read the accelerometer,gyroscope and magnetometer values
@@ -422,7 +426,11 @@ def runIMU():
         elif AccYangle < -60:
             handleIMU("downward motion detected - ACCY Angle " + str(AccYangle))
         else:
-            printD(str(AccYangle))
+            data.append([str(AccYangle)])
+            count += 1
+            if(count >= 300):
+                printD(data)
+                print("done!")
 
 if __name__ == "__main__": 
     #mqtt_test = mqtt.MQTTLink("ece180d/MEAT/imu")
