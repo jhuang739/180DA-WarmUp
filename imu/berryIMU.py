@@ -426,11 +426,13 @@ def runIMU():
         elif AccYangle < -60:
             handleIMU("downward motion detected - ACCY Angle " + str(AccYangle))
         else:
+            print(str(AccYangle))
             data.append([str(AccYangle)])
             count += 1
             if(count >= 300):
                 printD(data)
                 print("done!")
+                break
 
 if __name__ == "__main__": 
     #mqtt_test = mqtt.MQTTLink("ece180d/MEAT/imu")
