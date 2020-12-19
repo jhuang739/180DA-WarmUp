@@ -25,7 +25,6 @@ import datetime
 import os
 import csv
 
-from imu_integration.pub import PUBLISHER
 import mqtt_link as mqtt
 
 
@@ -84,17 +83,9 @@ KFangleX = 0.0
 KFangleY = 0.0
 
 
-def handleIMU(mqtt_test, action):
+def handleIMU(action):
     mqtt_test.addText(action, "Siri")
     mqtt_test.send()
-    """
-    publisher = PUBLISHER("ece180d/MEAT/imu", action)
-    client = publisher.connect()
-    client.loop_start()
-    publisher.send(client)
-    client.loop_stop()
-    client.disconnect()
-    """
 
 def printD(self, data):
     with open('imudata.csv', 'w') as csvfile:
@@ -173,7 +164,7 @@ def kalmanFilterX ( accAngle, gyroRate, DT):
 
     return KFangleX
 
-def runIMU(mqtt_test):
+def runIMU():
     gyroXangle = 0.0
     gyroYangle = 0.0
     gyroZangle = 0.0
@@ -426,12 +417,12 @@ def runIMU(mqtt_test):
         time.sleep(0.03)
 
         if AccYangle > 60:
-            handleIMU(mqtt_test, "upward motion detected - ACCY Angle " + str(AccYangle))
+            handleIMU("upward motion detected - ACCY Angle " + str(AccYangle))
         elif AccYangle < -60:
-            handleIMU(mqtt_test, "downward motion detected - ACCY Angle " + str(AccYangle))
+            handleIMU("downward motion detected - ACCY Angle " + str(AccYangle))
         else:
             printD(str(AccYangle))
 
 if __name__ == "__main__": 
-    mqtt_test = mqtt.MQTTLink("ece180d/MEAT/imu")
-    runIMU(mqtt_test)
+    #mqtt_test = mqtt.MQTTLink("ece180d/MEAT/imu")
+    runIMU()
